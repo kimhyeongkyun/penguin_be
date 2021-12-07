@@ -10,6 +10,7 @@ import router from './routers';
 import { itemRouter } from './routers/items.router';
 import { errorHandler } from './middleware/error.middleware';
 import { notFoundHandler } from './middleware/not-found.middleware';
+import { userRouter } from './routers/users.router';
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use(loggerMiddleware);
 app.use(bodyParser.json());
 app.use('/api', router);
 app.use("/api/menu/items", itemRouter);
+app.use("/api/user", userRouter);
 
 app.use(errorHandler);
 app.use(notFoundHandler);

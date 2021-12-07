@@ -4,6 +4,7 @@
 import { Request, Response } from "express";
 import * as ItemService from "../services/items.service";
 import { BaseItem, Item } from "../interfaces/items/item.interface";
+import {signToken} from "../middleware/authz.middleware";
 
 export const findAll =  async(req:Request, res:Response)=>{
     try {
@@ -31,7 +32,7 @@ export const create = async(req:Request, res:Response)=>{
     try{
         const item: BaseItem = req.body;
         const newItem = await ItemService.create(item);
-        res.status(201).send(newItem);
+        res.status(201).send({newItem: newItem});
     }catch(error: any){
         res.status(500).send(error.message);
     }
@@ -64,3 +65,4 @@ export const remove = async(req:Request, res:Response)=>{
         res.status(500).send(error.message);
     }
 }
+
